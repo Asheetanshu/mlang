@@ -26,10 +26,13 @@ int main(int argc , char* argv[]){
     fclose(fptr);
 
     size_t i = 0;
+    char *str;
     while(tokens[i].type != END_OF_TOKENS){
-        printf("%20s -> %20s\n",which_token_type(tokens[i].type) , tokens[i].value);
+        str = which_token_type(tokens[i].type);
+        printf("%20s -> %20s\n", str, tokens[i].value);
         i++;
     }
+    free(str);
 
     free(tokens);
     printf("File compiled successfully\n");

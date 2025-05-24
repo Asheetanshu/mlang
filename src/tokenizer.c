@@ -53,36 +53,85 @@ Token* tokenise(FILE* fin){
                 i++;
                 check_next(fin , is_equal , &flag);
             }
+        }else if (is_underscore(ch)){
+            if (i != 0){
+                if (is_alpha(token_name[0])){
+                    int alnum = 0 , underscore = 0;
+                    check_next(fin , is_alnum , &alnum);
+                    check_next(fin , is_underscore , &underscore);
+                    if (alnum && underscore){
+                        flag = 1;
+                    }
+                    token_name[i] = ch;
+                    i++;
+                }
+                else if (is_digit(token_name[0])){
+                    int number = 0 , underscore = 0;
+                    check_next(fin , is_digit , &number);
+                    check_next(fin , is_underscore , &underscore);
+                    if (number && underscore) {
+                        flag = 1;
+                    }
+                }
+            }else {
+                printf("Unwanted underscore \n\nAborting compilation\n\n");
+                exit(0);
+            }
         }
         else if (is_alpha(ch)){
             if (i != 0){
                 if (is_alpha(token_name[0])){
+                    int alnum = 0 , underscore = 0;
+                    check_next(fin , is_alnum , &alnum);
+                    check_next(fin , is_underscore , &underscore);
+                    if (alnum && underscore){
+                        flag = 1;
+                    }
                     token_name[i] = ch;
                     i++;
-                    check_next(fin , is_alnum , &flag);
+                }
+                else {
+                    printf("Unwanted Charecter \n\nAborting compilation\n\n");
+                    exit(0);
                 }
             }
             else {
                 token_name[i] = ch;
                 i++;
-                check_next(fin , is_alnum , &flag);
+                int alnum = 0 , underscore = 0;
+                check_next(fin , is_alnum , &alnum);
+                check_next(fin , is_underscore , &underscore);
+                if (alnum && underscore){
+                    flag = 1;
+                }
             }
         }else if (is_digit(ch)){
             if (i != 0) {
                 if(is_digit(token_name[0])){
-                    token_name[i] = ch;
-                    i++;
-                    check_next(fin , is_digit , &flag);
+                    int number = 0 , underscore = 0;
+                    check_next(fin , is_digit , &number);
+                    check_next(fin , is_underscore , &underscore);
+                    if (number && underscore) {
+                        flag = 1;
+                    }
                 }else if(is_alpha(token_name[0])){
-                    token_name[i] = ch;
-                    i++;
-                    check_next(fin , is_alnum , &flag);
+                    int alnum = 0 , underscore = 0;
+                    check_next(fin , is_alnum , &alnum);
+                    check_next(fin , is_underscore , &underscore);
+                    if (alnum && underscore){
+                        flag = 1;
+                    }
                 }
             }else {
-                token_name[i] = ch;
-                i++;
-                check_next(fin , is_digit , &flag);
+                int number = 0 , underscore = 0;
+                check_next(fin , is_digit , &number);
+                check_next(fin , is_underscore , &underscore);
+                if (number && underscore) {
+                    flag = 1;
+                }
             }
+            token_name[i] = ch;
+            i++;
         }
         ch = fgetc(fin);
         if (i == (token_nameLen - 1) && flag == 0){
@@ -104,6 +153,7 @@ TokenType which_token(const char* token_name){
     else if (!strcmp(token_name , ";"))         return SEMI;
     else if (!strcmp(token_name , ","))         return COMMA;
     else if (!strcmp(token_name , "exit"))      return EXIT;
+    else if (!strcmp(token_name , "fn"))        return FN;
     else if (!strcmp(token_name , "return"))    return RETURN;
     else if (!strcmp(token_name , "if"))        return IF;
     else if (!strcmp(token_name , "else"))      return ELSE;
@@ -178,4 +228,8 @@ int is_valsym(char ch){
 
 int is_equal(char ch){
     return ch == '=';
+}
+
+int is_underscore(char ch){
+    return ch == '_';
 }

@@ -37,6 +37,7 @@ typedef enum {
     KEYWORD_START,
     EXIT = KEYWORD_START,
     RETURN,
+    FN,
     IF,
     ELSE,
     K_INT,
@@ -67,6 +68,7 @@ int is_alpha(char ch);
 int is_digit(char ch);
 int is_valsym(char ch);
 int is_equal(char ch);
+int is_underscore(char ch);
 void check_next(FILE *fin , int (*fn)(char ch) , int *flag);
 
 // actual tokenizer funtions...

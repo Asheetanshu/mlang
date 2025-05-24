@@ -6,7 +6,7 @@ SRCS = main.c tokenizer.c
 
 HDRS = tokenizer.h
 
-CFLAGS = -Wall -g
+CFLAGS = -Wall -Wextra -g
 
 $(TARGET) : $(SRCS) $(HDRS)
 	$(cc) $(CFLAGS) -o $(TARGET) $(SRCS)
