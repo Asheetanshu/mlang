@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tokenizer.h"
+#include "../header/m_tokenizer.h"
 
 Token* tokenise(FILE* fin){
     size_t i = 0;

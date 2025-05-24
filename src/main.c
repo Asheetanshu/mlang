@@ -1,7 +1,7 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include "tokenizer.h"
-#include "parser.h"
+#include <stdlib.h>
+#include "../header/m_tokenizer.h"
+#include "../header/m_parser.h"
 
 
 // main function________________
