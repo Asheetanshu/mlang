@@ -1,5 +1,5 @@
-#ifndef TOKENIZER_H
-#define TOKENIZER_H
+#ifndef M_TOKENIZER_H
+#define M_TOKENIZER_H
 
 #include <stdio.h>
 
