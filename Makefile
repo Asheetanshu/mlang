@@ -2,9 +2,9 @@ cc = clang
 
 TARGET = mlang.exe
 
-SRCS = src/main.c src/tokenizer.c
+SRCS = src/*.c
 
-HDRS = header/tokenizer.h
+HDRS = header/*.h
 
 CFLAGS = -Wall -Wextra -g
 

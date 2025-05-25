@@ -25,16 +25,10 @@ int main(int argc , char* argv[]){
 
     fclose(fptr);
 
-    size_t i = 0;
-    char *str;
-    while(tokens[i].type != END_OF_TOKENS){
-        str = which_token_type(tokens[i].type);
-        printf("%20s -> %20s\n", str, tokens[i].value);
-        i++;
-    }
-    free(str);
+    P_Node *root = parse(tokens);
 
     free(tokens);
+    free_tree(root);
     printf("File compiled successfully\n");
     return 0;
 

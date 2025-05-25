@@ -11,7 +11,7 @@ Token* tokenise(FILE* fin){
     Token* tokens = calloc(sizeof(Token) , initial_allc); 
     if (tokens == NULL){
         printf("Mem allocation failed \n\nStopping compilation\n\n");
-        exit(0);
+        exit(1);
     }
     char ch = fgetc(fin);
     char token_name[token_nameLen] = "";
@@ -26,7 +26,7 @@ Token* tokenise(FILE* fin){
                 Token* temp = realloc(tokens , initial_allc * sizeof(Token));
                 if (temp == NULL){
                     printf("Mem allocation failed \n\nStopping compilation\n\n");
-                    exit(0);
+                    exit(1);
                 }
                 tokens = temp;
             }
@@ -75,7 +75,7 @@ Token* tokenise(FILE* fin){
                 }
             }else {
                 printf("Unwanted underscore \n\nAborting compilation\n\n");
-                exit(0);
+                exit(1);
             }
         }
         else if (is_alpha(ch)){
@@ -92,7 +92,7 @@ Token* tokenise(FILE* fin){
                 }
                 else {
                     printf("Unwanted Charecter \n\nAborting compilation\n\n");
-                    exit(0);
+                    exit(1);
                 }
             }
             else {
@@ -136,7 +136,7 @@ Token* tokenise(FILE* fin){
         ch = fgetc(fin);
         if (i == (token_nameLen - 1) && flag == 0){
             printf("Compilation Failed \n\nToo long identifier\n\nexceeded name_limit\n\n");
-            exit(0);
+            exit(1);
         }
     }
     tokens[len].type = END_OF_TOKENS;
@@ -217,7 +217,7 @@ int is_digit(char ch){
 
 
 int is_valsym(char ch){
-    char* valid_symbol = "(){}[];,+-*/";
+    char* valid_symbol = "(){}[];,+-*/ ";
     for (int i = 0 ; valid_symbol[i] != '\0';i++){
         if (valid_symbol[i] == ch) {
             return 1;
